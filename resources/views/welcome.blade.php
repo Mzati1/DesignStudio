@@ -4,5 +4,5 @@
 
 
 @section('content')
-
+<!--place content here -->
 @endsection
