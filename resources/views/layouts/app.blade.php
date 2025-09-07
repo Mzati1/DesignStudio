@@ -22,7 +22,7 @@
     
     <x-welcome-page.navigation />
 
-    <main class="flex-1 w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-1 w-full mx-auto px-[10px] py-8">
       @yield('content')
     </main>
 
