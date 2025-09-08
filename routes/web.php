@@ -19,4 +19,9 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+
+// Social auth routes
+Route::get('/auth/{provider}/redirect', [OAuth\SocialController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [OAuth\SocialController::class, 'handleProviderCallback']);
+
 require __DIR__.'/auth.php';
