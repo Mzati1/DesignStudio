@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -135,6 +134,6 @@ class SocialController extends Controller
         }
 
         // Shuffle to avoid predictable positions
-        return Str::of($password)->shuffle()->toString();
+        return str_shuffle($password);
     }
 }

@@ -131,12 +131,11 @@ new #[Layout('components.layouts.auth')] class extends Component {
             </div>
         </div>
     
-        <!-- Google Sign In Button -->
         <div class="w-full">
             <flux:button 
                 variant="outline" 
                 class="w-full flex items-center justify-center gap-3 py-3"
-                onclick="window.location.href='/auth/google'"
+                onclick="window.location.href='{{ route('social.redirect', ['provider' => 'google']) }}'"
             >
                 <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -147,6 +146,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
                 {{ __('Login with Google') }}
             </flux:button>
         </div>
+        
 
     @if (Route::has('register'))
         <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
