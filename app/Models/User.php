@@ -26,6 +26,7 @@ class User extends Authenticatable
         'name',
         'avatar',
         'email',
+        'role',
         'password',
     ];
 
@@ -64,6 +65,15 @@ class User extends Authenticatable
             ->implode('');
     }
 
+    /** Check if user is admin  
+     * 
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }   
+    
     /* RELATIONSHIPS */
     //social accounts
     /**
