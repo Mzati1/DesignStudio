@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\OAuth\SocialController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,7 +22,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 // Social auth routes
-Route::get('/auth/{provider}/redirect', [OAuth\SocialController::class, 'redirectToProvider']);
-Route::get('/auth/{provider}/callback', [OAuth\SocialController::class, 'handleProviderCallback']);
+Route::prefix('auth')->name('social.')->controller(SocialController::class)->group(function () {
+	Route::get('{provider}/redirect', 'redirectToProvider')->name('redirect');
+	Route::get('{provider}/callback', 'handleProviderCallback')->name('callback');
+});
 
 require __DIR__.'/auth.php';
