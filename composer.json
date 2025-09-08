@@ -13,6 +13,7 @@
         "laravel/framework": "^12.0",
         "laravel/passport": "^13.0",
         "laravel/socialite": "^5.23",
+        "laravel/telescope": "^5.11",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
         "livewire/volt": "^1.7.0"
@@ -66,7 +67,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [ "laravel/telescope"]
         }
     },
     "config": {
@@ -81,3 +82,5 @@
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+
+
