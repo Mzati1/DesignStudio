@@ -33,6 +33,11 @@
 
   --color-info: 199 89% 48%;          /* sky-500 */
   --color-info-hover: 199 89% 40%;    /* sky-600 */
+ 
+  /* Accents (from HEX: #721817, #E8E9EB, #4B5267) */
+  --color-accent-1: 1 66% 27%;   /* #721817 */
+  --color-accent-2: 240 7% 92%;  /* #E8E9EB */
+  --color-accent-3: 240 16% 35%; /* #4B5267 */
 }
 
 /* Dark mode */
@@ -68,4 +73,9 @@
 
   --color-info: 199 89% 63%;          /* sky-400 */
   --color-info-hover: 199 89% 72%;    /* sky-300 */
+ 
+  /* Accents (dark mode tuned) */
+  --color-accent-1: 1 66% 40%;   /* slightly lighter for dark mode */
+  --color-accent-2: 240 7% 85%;  /* toned down light gray for dark mode surfaces */
+  --color-accent-3: 240 16% 55%; /* lighter for contrast on dark */
 }

@@ -6,7 +6,7 @@
 <div x-data="landingPageData()" class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
     
     {{-- Hero Section --}}
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[hsl(var(--color-accent-2))] to-white dark:from-gray-900 dark:to-gray-800">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f3f4f6" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
         
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +28,7 @@
                 
                 {{-- CTA Buttons --}}
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <button @click="scrollToSection('innovation')" class="group px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-gray-700 dark:hover:bg-gray-100 transform hover:scale-105">
+                    <button @click="scrollToSection('innovation')" class="group px-8 py-4 bg-accent-1 text-white dark:text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-accent-3 transform hover:scale-105">
                         <span class="flex items-center space-x-2">
                             <span>Explore Innovation</span>
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
                         </span>
                     </button>
                     
-                    <button @click="scrollToSection('contact')" class="px-8 py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-gray-900 rounded-none font-semibold text-lg transition-all duration-200">
+                    <button @click="scrollToSection('contact')" class="px-8 py-4 border-2 border-accent-1 text-accent-1 hover:bg-accent-1 hover:text-white rounded-none font-semibold text-lg transition-all duration-200">
                         Get In Touch
                     </button>
                 </div>
@@ -108,7 +108,7 @@
     </section>
 
     {{-- Research Areas Section --}}
-    <section id="research" class="py-24 bg-gray-50 dark:bg-gray-800">
+    <section id="research" class="py-24 bg-[hsl(var(--color-accent-2))] dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
@@ -121,8 +121,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="group bg-white dark:bg-gray-900 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364-.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                         </svg>
                     </div>
@@ -130,7 +130,7 @@
                     <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Exploring the intersection of AI and human creativity to develop intelligent systems that enhance rather than replace human capabilities.
                     </p>
-                    <div class="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                    <div class="flex items-center text-accent-1 font-semibold group-hover:text-accent-3 transition-colors">
                         <span>Learn More</span>
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -139,8 +139,8 @@
                 </div>
 
                 <div class="group bg-white dark:bg-gray-900 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-accent-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                         </svg>
                     </div>
@@ -148,7 +148,7 @@
                     <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Creating immersive experiences that blend physical and digital worlds, from AR interfaces to VR collaboration spaces.
                     </p>
-                    <div class="flex items-center text-purple-600 dark:text-purple-400 font-semibold group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                    <div class="flex items-center text-accent-3 font-semibold group-hover:text-accent-1 transition-colors">
                         <span>Learn More</span>
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -157,8 +157,8 @@
                 </div>
 
                 <div class="group bg-white dark:bg-gray-900 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
@@ -166,7 +166,7 @@
                     <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Developing eco-friendly digital solutions that minimize environmental impact while maximizing user value and accessibility.
                     </p>
-                    <div class="flex items-center text-green-600 dark:text-green-400 font-semibold group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">
+                    <div class="flex items-center text-accent-1 font-semibold group-hover:text-accent-3 transition-colors">
                         <span>Learn More</span>
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -296,19 +296,19 @@
                 <div class="space-y-8">
                     <div class="group cursor-pointer">
                         <div class="flex items-start space-x-6 p-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent-1 transition-colors">
                                     Healthcare Accessibility
                                 </h3>
                                 <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                                     Developed an AI-powered diagnostic tool that increased early disease detection rates by 40% in underserved communities.
                                 </p>
-                                <div class="flex items-center text-blue-600 dark:text-blue-400 font-semibold">
+                                <div class="flex items-center text-accent-1 font-semibold">
                                     <span>Read Case Study</span>
                                     <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -320,19 +320,19 @@
 
                     <div class="group cursor-pointer">
                         <div class="flex items-start space-x-6 p-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                            <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent-1 transition-colors">
                                     Climate Action Platform
                                 </h3>
                                 <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                                     Created a carbon tracking system that helped 500+ companies reduce their environmental footprint by an average of 30%.
                                 </p>
-                                <div class="flex items-center text-green-600 dark:text-green-400 font-semibold">
+                                <div class="flex items-center text-accent-1 font-semibold">
                                     <span>Read Case Study</span>
                                     <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -344,19 +344,19 @@
 
                     <div class="group cursor-pointer">
                         <div class="flex items-start space-x-6 p-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-16 h-16 bg-[hsl(var(--color-accent-2))] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-accent-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent-3 transition-colors">
                                     Educational Equity
                                 </h3>
                                 <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                                     Built an adaptive learning platform that improved student outcomes by 60% in rural schools with limited resources.
                                 </p>
-                                <div class="flex items-center text-purple-600 dark:text-purple-400 font-semibold">
+                                <div class="flex items-center text-accent-3 font-semibold">
                                     <span>Read Case Study</span>
                                     <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -388,7 +388,7 @@
     </section>
 
     {{-- CTA Section --}}
-    <section id="contact" class="py-24 bg-gray-900 dark:bg-black">
+    <section id="contact" class="py-24 bg-accent-1 dark:bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
                 Join the Innovation
@@ -397,10 +397,10 @@
                 Be part of the future we're building. Whether you're a researcher, entrepreneur, or organization looking to make an impact, we'd love to collaborate with you.
             </p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <button class="px-8 py-4 bg-white text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-gray-100 transform hover:scale-105">
+                <button class="px-8 py-4 bg-white text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-[hsl(var(--color-accent-2))] transform hover:scale-105">
                     Start Collaborating
                 </button>
-                <button class="px-8 py-4 border-2 border-white text-white rounded-none font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-gray-900">
+                <button class="px-8 py-4 border-2 border-white text-white rounded-none font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-accent-1">
                     Learn More
                 </button>
             </div>

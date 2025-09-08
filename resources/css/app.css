@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './colorPallete.css';
 @import '../../vendor/livewire/flux/dist/flux.css';
 
 @source '../views';
@@ -45,6 +46,36 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+}
+
+/* Accent utility classes mapped to CSS variables */
+@layer utilities {
+    /* text colors */
+    .text-accent-1 { color: hsl(var(--color-accent-1)); }
+    .text-accent-2 { color: hsl(var(--color-accent-2)); }
+    .text-accent-3 { color: hsl(var(--color-accent-3)); }
+
+    .hover\:text-accent-1:hover { color: hsl(var(--color-accent-1)); }
+    .hover\:text-accent-2:hover { color: hsl(var(--color-accent-2)); }
+    .hover\:text-accent-3:hover { color: hsl(var(--color-accent-3)); }
+
+    /* background colors */
+    .bg-accent-1 { background-color: hsl(var(--color-accent-1)); }
+    .bg-accent-2 { background-color: hsl(var(--color-accent-2)); }
+    .bg-accent-3 { background-color: hsl(var(--color-accent-3)); }
+
+    .hover\:bg-accent-1:hover { background-color: hsl(var(--color-accent-1)); }
+    .hover\:bg-accent-2:hover { background-color: hsl(var(--color-accent-2)); }
+    .hover\:bg-accent-3:hover { background-color: hsl(var(--color-accent-3)); }
+
+    /* border colors */
+    .border-accent-1 { border-color: hsl(var(--color-accent-1)); }
+    .border-accent-2 { border-color: hsl(var(--color-accent-2)); }
+    .border-accent-3 { border-color: hsl(var(--color-accent-3)); }
+
+    .ring-accent-1 { --tw-ring-color: hsl(var(--color-accent-1)); }
+    .ring-accent-2 { --tw-ring-color: hsl(var(--color-accent-2)); }
+    .ring-accent-3 { --tw-ring-color: hsl(var(--color-accent-3)); }
 }
 
 [data-flux-field]:not(ui-radio, ui-checkbox) {
