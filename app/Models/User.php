@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
@@ -76,15 +77,15 @@ class User extends Authenticatable
     
     /* RELATIONSHIPS */
     //social accounts
-    /**
-     *
-     * Get the social accounts associated with the User
-     *
-     * @return HasMany
-     */
     public function socialAccounts(): HasMany
     {
         return $this->hasMany(SocialAccount::class);
+    }
+
+    //Membership relationship
+    public function member()
+    {
+    return $this->hasOne(Member::class);
     }
 
 }
