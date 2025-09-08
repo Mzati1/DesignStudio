@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fees;
 
 use App\Http\Requests\StoreFeeRequest;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Models\Fee;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class FeeController extends Controller{
+class FeeController extends Controller
+{
     /**
      * List all fees (with optional pagination)
      */
@@ -82,7 +86,13 @@ class FeeController extends Controller{
 
         $fee->update(array_merge(
             $request->only([
-                'name', 'slug', 'amount', 'currency', 'description', 'duration_months', 'active'
+                'name',
+                'slug',
+                'amount',
+                'currency',
+                'description',
+                'duration_months',
+                'active'
             ]),
             ['updated_by' => $request->user()->id]
         ));
@@ -107,9 +117,11 @@ class FeeController extends Controller{
         $originalSlug = $slug;
         $count = 1;
 
-        while (Fee::where('slug', $slug)
-            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
-            ->exists()) {
+        while (
+            Fee::where('slug', $slug)
+                ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
             $slug = $originalSlug . '-' . $count++;
         }
 

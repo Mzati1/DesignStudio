@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Members;
 
-use App\Http\Requests\StoreMemberRequest;
-use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Payments\PaymentController;
 
 class MemberController extends Controller
 {
@@ -51,14 +51,11 @@ class MemberController extends Controller
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email' => (string) ($user->email ?? ''),
-            'meta' => [
-                'user_id' => $user->id ?? null,
-                'purpose' => 'membership_subscription',
-            ],
         ];
 
+
         /** @var PaymentController $paymentController */
-        $paymentController = app(\App\Http\Controllers\PaymentController::class);
+        $paymentController = app(PaymentController::class);
         $result = $paymentController->startPayment($paymentData);
 
         if (!empty($result['success'])) {

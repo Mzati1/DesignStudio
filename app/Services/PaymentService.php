@@ -31,7 +31,7 @@ class PaymentService
     {
         try {
             $secretKey = env('PAYCHANGU_TEST_SECRET_KEY');
-            
+
             if (empty($secretKey)) {
                 throw new Exception('Missing PAYCHANGU_TEST_SECRET_KEY in environment.');
             }
@@ -40,7 +40,7 @@ class PaymentService
             $uuid = Str::uuid()->toString();
 
             $payload = [
-                'currency' => strtoupper($paymentData['currency']),
+                'currency' => 'MWK',
                 'uuid' => $uuid,
                 'tx_ref' => $txRef,
                 'amount' => $paymentData['amount'],
@@ -49,7 +49,6 @@ class PaymentService
                 'email' => $paymentData['email'],
                 'return_url' => $this->returnUrl,
                 'callback_url' => $this->callbackUrl,
-                'meta' => json_encode($paymentData['meta'] ?? []),
             ];
 
             $response = $this->client->post($this->apiUrl, [
@@ -94,16 +93,3 @@ class PaymentService
         return 'TXN_' . now()->timestamp . '_' . mt_rand(1000, 9999);
     }
 }
-
-
-/* use case 
- // 3️⃣ Initialize payment
- $result = $paymentService->initialize($paymentData);
-
- // 4️⃣ Redirect user to PayChangu checkout if successful
- if ($result['success']) {
-     return redirect($result['checkout_url']);
- }
-
- // 5️⃣ Handle failure
- return back()->withErrors($result['error']);*/
