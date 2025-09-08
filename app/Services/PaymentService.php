@@ -16,7 +16,7 @@ class PaymentService
     public function __construct()
     {
         $this->client = new Client();
-        $this->apiUrl = 'https://api.paychangu.com/payment'; // PayChangu endpoint
+        $this->apiUrl = env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment'); // PayChangu endpoint
         $this->returnUrl = config('app.url') . '/payment/return';
         $this->callbackUrl = config('app.url') . '/payment/callback';
     }
@@ -30,6 +30,12 @@ class PaymentService
     public function initialize(array $paymentData): array
     {
         try {
+            $secretKey = env('PAYCHANGU_TEST_SECRET_KEY');
+            
+            if (empty($secretKey)) {
+                throw new Exception('Missing PAYCHANGU_TEST_SECRET_KEY in environment.');
+            }
+
             $txRef = $this->generateTransactionReference();
             $uuid = Str::uuid()->toString();
 
@@ -49,6 +55,7 @@ class PaymentService
             $response = $this->client->post($this->apiUrl, [
                 'body' => json_encode($payload),
                 'headers' => [
+                    'Authorization' => 'Bearer ' . $secretKey,
                     'accept' => 'application/json',
                     'content-type' => 'application/json',
                 ],

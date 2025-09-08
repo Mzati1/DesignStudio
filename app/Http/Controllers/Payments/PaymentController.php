@@ -5,62 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Payment;
+use App\Services\PaymentService;
+use Exception;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private PaymentService $paymentService;
+
+    public function __construct(PaymentService $paymentService)
     {
-        //
+        $this->paymentService = $paymentService;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Start a payment using PaymentService
+     *
+     * @param array $paymentData
+     * @return array
      */
-    public function create()
+    public function startPayment(array $paymentData): array
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePaymentRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePaymentRequest $request, Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Payment $payment)
-    {
-        //
+        return $this->paymentService->initialize($paymentData);
     }
 }
