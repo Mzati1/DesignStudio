@@ -161,16 +161,16 @@ $navigationConfig = [
     class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-7xl px-4"
 >
     <!-- Main Navigation Container -->
-    <nav class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-slate-200/20 dark:border-slate-700/30 rounded-2xl shadow-lg shadow-slate-900/5 px-6 py-3">
+    <nav class="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg border border-zinc-200/20 dark:border-zinc-700/30 rounded-2xl shadow-lg shadow-zinc-900/5 px-6 py-3">
         <div class="flex items-center justify-between">
             <!-- Logo with Icon -->
             <div class="flex-shrink-0 flex items-center space-x-3">
-                <div class="w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                    <svg class="w-5 h-5 text-white dark:text-slate-900" fill="currentColor" viewBox="0 0 24 24">
+                <div class="w-8 h-8 bg-zinc-900 dark:bg-white rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                    <svg class="w-5 h-5 text-white dark:text-zinc-900" fill="currentColor" viewBox="0 0 24 24">
                         {!! $navigationConfig['brand']['icon'] !!}
                     </svg>
                 </div>
-                <a href="{{ route($navigationConfig['brand']['route']) }}" class="text-xl font-semibold text-slate-900 dark:text-slate-100 transition-colors duration-200 hover:text-slate-700 dark:hover:text-slate-300">
+                <a href="{{ route($navigationConfig['brand']['route']) }}" class="text-xl font-semibold text-zinc-900 dark:text-white transition-colors duration-200 hover:text-zinc-700 dark:hover:text-zinc-300">
                     {{ $navigationConfig['brand']['name'] }}
                 </a>
             </div>
@@ -183,8 +183,8 @@ $navigationConfig = [
                         <div class="relative" @click.away="{{ strtolower($navItem['label']) }}DropdownOpen = false">
                             <button 
                                 @click="{{ strtolower($navItem['label']) }}DropdownOpen = !{{ strtolower($navItem['label']) }}DropdownOpen; {{ strtolower($navItem['label']) === 'services' ? 'resourcesDropdownOpen = false' : 'servicesDropdownOpen = false' }}"
-                                class="flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100' }}"
-                                :class="{ 'bg-slate-100 dark:bg-slate-800': {{ strtolower($navItem['label']) }}DropdownOpen }"
+                                class="flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-zinc-900 dark:text-white bg-zinc-50 dark:bg-zinc-800' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white' }}"
+                                :class="{ 'bg-zinc-100 dark:bg-zinc-800': {{ strtolower($navItem['label']) }}DropdownOpen }"
                             >
                                 {{ $navItem['label'] }}
                                 <svg class="ml-1 w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': {{ strtolower($navItem['label']) }}DropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,20 +200,20 @@ $navigationConfig = [
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100 scale-100"
                                 x-transition:leave-end="opacity-0 scale-95"
-                                class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-xl shadow-slate-900/10 border border-slate-200/50 dark:border-slate-700/50 overflow-hidden"
+                                class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-zinc-800 rounded-xl shadow-xl shadow-zinc-900/10 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden"
                                 style="display: none;"
                             >
                                 <div class="p-2">
                                     @foreach($navItem['items'] as $subItem)
-                                        <a href="{{ route($subItem['route']) }}" class="flex items-center px-3 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors duration-200 group">
-                                            <div class="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-slate-200 dark:group-hover:bg-slate-600 transition-colors duration-200">
-                                                <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <a href="{{ route($subItem['route']) }}" class="flex items-center px-3 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 rounded-lg transition-colors duration-200 group">
+                                            <div class="w-8 h-8 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-600 transition-colors duration-200">
+                                                <svg class="w-4 h-4 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     {!! $subItem['icon'] !!}
                                                 </svg>
                                             </div>
                                             <div>
                                                 <p class="font-medium">{{ $subItem['label'] }}</p>
-                                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ $subItem['description'] }}</p>
+                                                <p class="text-xs text-zinc-500 dark:text-zinc-400">{{ $subItem['description'] }}</p>
                                             </div>
                                         </a>
                                     @endforeach
@@ -223,7 +223,7 @@ $navigationConfig = [
                     @else
                         <!-- Regular Link -->
                         <a href="{{ route($navItem['route']) }}" 
-                           class="px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100' }}">
+                           class="px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-zinc-900 dark:text-white bg-zinc-50 dark:bg-zinc-800' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white' }}">
                            {{ $navItem['label'] }}
                         </a>
                     @endif
@@ -238,10 +238,10 @@ $navigationConfig = [
                     <div class="relative">
                         <button 
                             @click="notificationDropdownOpen = !notificationDropdownOpen; userDropdownOpen = false"
-                            class="relative p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-300 group"
-                            :class="{ 'bg-slate-100 dark:bg-slate-800': notificationDropdownOpen }"
+                            class="relative p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 group"
+                            :class="{ 'bg-zinc-100 dark:bg-zinc-800': notificationDropdownOpen }"
                         >
-                            <svg class="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5-5 5-5h-5m-6 0H4l5 5-5 5h5m4-8V7a3 3 0 00-6 0v5"></path>
                             </svg>
                             <!-- Notification Badge -->
@@ -257,28 +257,28 @@ $navigationConfig = [
                             x-transition:leave="transition ease-in duration-150"
                             x-transition:leave-start="opacity-100 scale-100"
                             x-transition:leave-end="opacity-0 scale-95"
-                            class="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-xl shadow-slate-900/10 border border-slate-200/50 dark:border-slate-700/50 overflow-hidden"
+                            class="absolute right-0 mt-2 w-80 bg-white dark:bg-zinc-800 rounded-xl shadow-xl shadow-zinc-900/10 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden"
                             style="display: none;"
                         >
-                            <div class="p-4 border-b border-slate-200 dark:border-slate-700">
-                                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Notifications</h3>
+                            <div class="p-4 border-b border-zinc-200 dark:border-zinc-700">
+                                <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Notifications</h3>
                             </div>
                             <div class="max-h-96 overflow-y-auto">
                                 @foreach($navigationConfig['notifications']['sampleData'] as $notification)
-                                <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 border-b border-slate-100 dark:border-slate-700/50 transition-colors duration-200">
+                                <div class="p-4 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 border-b border-zinc-100 dark:border-zinc-700/50 transition-colors duration-200">
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-2 h-2 bg-slate-600 dark:bg-slate-400 rounded-full mt-2"></div>
+                                        <div class="w-2 h-2 bg-zinc-600 dark:bg-zinc-400 rounded-full mt-2"></div>
                                         <div>
-                                            <p class="text-sm font-medium text-slate-900 dark:text-slate-100">{{ $notification['title'] }}</p>
-                                            <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">{{ $notification['message'] }}</p>
-                                            <p class="text-xs text-slate-500 dark:text-slate-500 mt-1">{{ $notification['time'] }}</p>
+                                            <p class="text-sm font-medium text-zinc-900 dark:text-white">{{ $notification['title'] }}</p>
+                                            <p class="text-xs text-zinc-600 dark:text-zinc-400 mt-1">{{ $notification['message'] }}</p>
+                                            <p class="text-xs text-zinc-500 dark:text-zinc-500 mt-1">{{ $notification['time'] }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
                             </div>
-                            <div class="p-4 border-t border-slate-200 dark:border-slate-700">
-                                <a href="#" class="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors duration-200">View all notifications</a>
+                            <div class="p-4 border-t border-zinc-200 dark:border-zinc-700">
+                                <a href="#" class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium transition-colors duration-200">View all notifications</a>
                             </div>
                         </div>
                     </div>
@@ -289,21 +289,21 @@ $navigationConfig = [
                 <div class="relative">
                     <button 
                         @click="userDropdownOpen = !userDropdownOpen; notificationDropdownOpen = false"
-                        class="flex items-center space-x-3 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-300 group"
-                        :class="{ 'bg-slate-100 dark:bg-slate-800': userDropdownOpen }"
+                        class="flex items-center space-x-3 px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 group"
+                        :class="{ 'bg-zinc-100 dark:bg-zinc-800': userDropdownOpen }"
                     >
                         <!-- User Avatar/Icon -->
                         @auth
                             @if(Auth::user()->avatar)
                                 <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="w-8 h-8 rounded-lg object-cover">
                             @else
-                                <div class="w-8 h-8 rounded-lg bg-slate-900 dark:bg-slate-100 flex items-center justify-center text-white dark:text-slate-900 text-sm font-medium">
+                                <div class="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-zinc-900 text-sm font-medium">
                                     {{ substr(Auth::user()->name, 0, 1) }}
                                 </div>
                             @endif
                         @else
-                            <div class="w-8 h-8 rounded-lg bg-slate-300 dark:bg-slate-600 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-8 h-8 rounded-lg bg-zinc-300 dark:bg-zinc-600 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
                             </div>
@@ -311,7 +311,7 @@ $navigationConfig = [
                         
                         <!-- User Name -->
                         <div class="hidden sm:block">
-                            <span class="text-sm font-medium text-slate-900 dark:text-slate-100">
+                            <span class="text-sm font-medium text-zinc-900 dark:text-white">
                                 @auth
                                     {{ Auth::user()->name }}
                                 @else
@@ -321,7 +321,7 @@ $navigationConfig = [
                         </div>
                         
                         <!-- Dropdown Arrow -->
-                        <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200 transition-all duration-200" :class="{ 'rotate-180': userDropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-all duration-200" :class="{ 'rotate-180': userDropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
@@ -335,44 +335,44 @@ $navigationConfig = [
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 scale-100"
                         x-transition:leave-end="opacity-0 scale-95"
-                        class="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-xl shadow-slate-900/10 border border-slate-200/50 dark:border-slate-700/50 overflow-hidden"
+                        class="absolute right-0 mt-2 w-64 bg-white dark:bg-zinc-800 rounded-xl shadow-xl shadow-zinc-900/10 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden"
                         style="display: none;"
                     >
                         @guest
                             <!-- Guest User Options -->
-                            <div class="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
-                                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Welcome!</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Sign in to access your account</p>
+                            <div class="p-6 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50">
+                                <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Welcome!</h3>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">Sign in to access your account</p>
                             </div>
                             <div class="p-2">
                                 @foreach($navigationConfig['userMenu']['guest'] as $guestItem)
-                                <a href="{{ route($guestItem['route']) }}" class="flex items-center px-4 py-3 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors duration-200 group">
-                                    <div class="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-slate-200 dark:group-hover:bg-slate-600 transition-colors duration-200">
-                                        <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <a href="{{ route($guestItem['route']) }}" class="flex items-center px-4 py-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 rounded-lg transition-colors duration-200 group">
+                                    <div class="w-8 h-8 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-600 transition-colors duration-200">
+                                        <svg class="w-4 h-4 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             {!! $guestItem['icon'] !!}
                                         </svg>
                                     </div>
                                     <div>
                                         <p class="font-medium">{{ $guestItem['label'] }}</p>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400">{{ $guestItem['description'] }}</p>
+                                        <p class="text-xs text-zinc-500 dark:text-zinc-400">{{ $guestItem['description'] }}</p>
                                     </div>
                                 </a>
                                 @endforeach
                             </div>
                         @else
                             <!-- Logged In User Options -->
-                            <div class="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                            <div class="p-6 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50">
                                 <div class="flex items-center space-x-3">
                                     @if(Auth::user()->avatar)
                                         <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="w-12 h-12 rounded-xl object-cover">
                                     @else
-                                        <div class="w-12 h-12 rounded-xl bg-slate-900 dark:bg-slate-100 flex items-center justify-center text-white dark:text-slate-900 font-medium text-lg">
+                                        <div class="w-12 h-12 rounded-xl bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-zinc-900 font-medium text-lg">
                                             {{ substr(Auth::user()->name, 0, 1) }}
                                         </div>
                                     @endif
                                     <div>
-                                        <p class="font-semibold text-slate-900 dark:text-slate-100">{{ Auth::user()->name }}</p>
-                                        <p class="text-sm text-slate-600 dark:text-slate-400">{{ Auth::user()->email }}</p>
+                                        <p class="font-semibold text-zinc-900 dark:text-white">{{ Auth::user()->name }}</p>
+                                        <p class="text-sm text-zinc-600 dark:text-zinc-400">{{ Auth::user()->email }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -394,9 +394,9 @@ $navigationConfig = [
                                     @endphp
                                     
                                     @if($shouldShow)
-                                        <a href="{{ route($userItem['route']) }}" class="flex items-center px-4 py-3 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors duration-200 group">
-                                            <div class="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-slate-200 dark:group-hover:bg-slate-600 transition-colors duration-200">
-                                                <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <a href="{{ route($userItem['route']) }}" class="flex items-center px-4 py-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 rounded-lg transition-colors duration-200 group">
+                                            <div class="w-8 h-8 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-600 transition-colors duration-200">
+                                                <svg class="w-4 h-4 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     {!! $userItem['icon'] !!}
                                                 </svg>
                                             </div>
@@ -405,14 +405,14 @@ $navigationConfig = [
                                     @endif
                                 @endforeach
                                 
-                                <div class="border-t border-slate-200 dark:border-slate-700 my-2"></div>
+                                <div class="border-t border-zinc-200 dark:border-zinc-700 my-2"></div>
                                 
                                 <button 
                                     @click="logout()"
-                                    class="flex items-center w-full px-4 py-3 text-slate-700 dark:text-slate-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200 group"
+                                    class="flex items-center w-full px-4 py-3 text-zinc-700 dark:text-zinc-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200 group"
                                 >
-                                    <div class="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors duration-200">
-                                        <svg class="w-4 h-4 text-slate-600 dark:text-slate-300 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex items-center justify-center mr-3 group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors duration-200">
+                                        <svg class="w-4 h-4 text-zinc-600 dark:text-zinc-300 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                         </svg>
                                     </div>
@@ -426,13 +426,13 @@ $navigationConfig = [
                 <!-- Mobile Menu Button -->
                 <button 
                     @click="navOpen = !navOpen"
-                    class="lg:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-300"
-                    :class="{ 'bg-slate-100 dark:bg-slate-800': navOpen }"
+                    class="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300"
+                    :class="{ 'bg-zinc-100 dark:bg-zinc-800': navOpen }"
                 >
-                    <svg x-show="!navOpen" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg x-show="!navOpen" class="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    <svg x-show="navOpen" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                    <svg x-show="navOpen" class="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
@@ -448,7 +448,7 @@ $navigationConfig = [
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 -translate-y-4"
-            class="lg:hidden mt-6 pt-6 border-t border-slate-200 dark:border-slate-700"
+            class="lg:hidden mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-700"
             style="display: none;"
         >
             <div class="flex flex-col space-y-1 pb-4">
@@ -456,11 +456,11 @@ $navigationConfig = [
                     @if(isset($navItem['type']) && $navItem['type'] === 'dropdown')
                         <!-- Mobile Dropdown Section -->
                         <div class="px-4 py-2">
-                            <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">{{ $navItem['label'] }}</p>
+                            <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">{{ $navItem['label'] }}</p>
                             <div class="pl-3 space-y-1">
                                 @foreach($navItem['items'] as $subItem)
                                     <a href="{{ route($subItem['route']) }}" @click="navOpen = false" 
-                                       class="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200">
+                                       class="block px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-200">
                                        {{ $subItem['label'] }}
                                     </a>
                                 @endforeach
@@ -469,7 +469,7 @@ $navigationConfig = [
                     @else
                         <!-- Mobile Regular Link -->
                         <a href="{{ route($navItem['route']) }}" @click="navOpen = false" 
-                           class="px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800' : 'text-slate-600 dark:text-slate-400' }}">
+                           class="px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg {{ request()->routeIs($navItem['routeCheck']) ? 'text-zinc-900 dark:text-white bg-zinc-50 dark:bg-zinc-800' : 'text-zinc-600 dark:text-zinc-400' }}">
                            {{ $navItem['label'] }}
                         </a>
                     @endif

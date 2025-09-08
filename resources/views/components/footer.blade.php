@@ -1,6 +1,6 @@
 {{-- resources/views/components/modern-footer.blade.php --}}
 <footer 
-    class="relative w-full mt-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+    class="relative w-full mt-20 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-800"
     x-data="footerInteractivity()"
     x-init="initFooter()"
 >
@@ -62,7 +62,7 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="flex items-center space-x-3">
                         <div 
-                            class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 rounded-2xl flex items-center justify-center shadow-lg cursor-pointer transform transition-all duration-200 hover:scale-105"
+                            class="w-12 h-12 bg-gradient-to-br from-zinc-600 to-zinc-700 dark:from-zinc-500 dark:to-zinc-600 rounded-2xl flex items-center justify-center shadow-lg cursor-pointer transform transition-all duration-200 hover:scale-105"
                             @click="footerBrandAnimation = !footerBrandAnimation"
                             :class="{ 'animate-pulse': footerBrandAnimation }"
                         >
@@ -71,18 +71,18 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">MUST Design Studio</h3>
-                            <p class="text-sm text-blue-600 dark:text-blue-400">Creative Excellence</p>
+                            <h3 class="text-xl font-bold text-zinc-900 dark:text-white">MUST Design Studio</h3>
+                            <p class="text-sm text-zinc-600 dark:text-zinc-400">Creative Excellence</p>
                         </div>
                     </div>
                     
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         Transforming ideas into exceptional digital experiences through innovative design, cutting-edge technology, and strategic thinking.
                     </p>
 
                     {{-- Social Links --}}
                     <div class="space-y-4">
-                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                        <h4 class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider">
                             Follow Us
                         </h4>
                         <div class="flex space-x-3">
@@ -91,7 +91,7 @@
                                     href="{{ $social['href'] }}"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500 transition-all duration-200 transform hover:scale-110 hover:shadow-lg"
+                                    class="w-10 h-10 rounded-xl flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-600 hover:text-white dark:hover:bg-zinc-500 transition-all duration-200 transform hover:scale-110 hover:shadow-lg"
                                     aria-label="Follow us on {{ $social['name'] }}"
                                     @mouseenter="footerSocialHover = '{{ $social['name'] }}'"
                                     @mouseleave="footerSocialHover = null"
@@ -101,7 +101,7 @@
                             @endforeach
                         </div>
                         <p 
-                            class="text-xs text-gray-500 dark:text-gray-400 transition-opacity duration-200"
+                            class="text-xs text-zinc-500 dark:text-zinc-400 transition-opacity duration-200"
                             x-show="footerSocialHover"
                             x-text="footerSocialHover ? `Connect with us on ${footerSocialHover}` : ''"
                         ></p>
@@ -111,7 +111,7 @@
                 {{-- Links Sections --}}
                 @foreach($footerLinks as $category => $links)
                     <div class="space-y-4">
-                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                        <h4 class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider">
                             {{ $category }}
                         </h4>
                         <ul class="space-y-3">
@@ -119,7 +119,7 @@
                                 <li>
                                     <a 
                                         href="{{ $link['href'] }}" 
-                                        class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
+                                        class="text-zinc-600 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors duration-200 text-sm flex items-center group"
                                     >
                                         {{ $link['name'] }}
                                         <svg class="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,10 +135,10 @@
         </div>
 
         {{-- Bottom Bar --}}
-        <div class="border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+        <div class="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-50/50 dark:bg-zinc-800/50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-                    <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-gray-600 dark:text-gray-400">
+                    <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-zinc-600 dark:text-zinc-400">
                         <p>&copy; {{ date('Y') }} MUST Design Studio. All rights reserved.</p>
                         <div class="flex items-center space-x-1 text-xs">
                             <span>Made with</span>
@@ -152,13 +152,13 @@
                     
                     <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
                         <div class="flex space-x-4">
-                            <a href="/privacy" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <a href="/privacy" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
                                 Privacy Policy
                             </a>
-                            <a href="/terms" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <a href="/terms" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
                                 Terms of Service
                             </a>
-                            <a href="/cookies" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <a href="/cookies" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
                                 Cookie Policy
                             </a>
                         </div>
@@ -166,7 +166,7 @@
                         {{-- Back to Top Button --}}
                         <button
                             @click="footerScrollToTop()"
-                            class="inline-flex items-center space-x-2 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 transform hover:scale-105"
+                            class="inline-flex items-center space-x-2 px-3 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-200 transform hover:scale-105"
                         >
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
@@ -193,4 +193,3 @@
         }
         </script>
 </footer>
-
