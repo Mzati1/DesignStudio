@@ -5,7 +5,6 @@ namespace App\Http\Controllers\OAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Models\SocialAccount;
@@ -64,11 +63,13 @@ class SocialController extends Controller
             }
 
             $name = $socialUser->getName() ?: $socialUser->getNickname() ?: ucfirst($provider) . ' User';
+            $avatar = $socialUser->getAvatar();
 
             $user = User::firstOrCreate(
                 ['email' => $email],
                 [
                     'name' => $name,
+                    'avatar' => $avatar,
                     'password' => $this->generateStrongPassword(),
                 ]
             );
