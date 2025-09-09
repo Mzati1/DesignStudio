@@ -11,7 +11,7 @@ class StorePaymentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,9 @@ class StorePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tx_ref' => 'required|string|max:255',
+            'user_id' => 'required|integer|exists:users,id',
+            'agenda' => 'nullable|string|max:255',
         ];
     }
 }

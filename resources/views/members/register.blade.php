@@ -2,6 +2,17 @@
 
 @section('title', 'Complete Your Membership')
 
+@php
+    // Get semester membership fee from database
+    $semesterFee = \App\Models\Fee::where('slug', 'semester-membership')->first();
+    
+    // Fallback data if not found in database
+    $feeName = $semesterFee->name ?? 'Semester Membership';
+    $feeAmount = $semesterFee->amount ?? 2000;
+    $feeCurrency = $semesterFee->currency ?? 'MWK';
+    $feeDescription = $semesterFee->description ?? 'Perfect for focused project work';
+@endphp
+
 @section('content')
     {{-- Skeleton Loading State --}}
     <div id="skeleton-loader"
@@ -114,16 +125,21 @@
                     <div
                         class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-6">
                         <div class="flex items-center space-x-3 sm:space-x-4">
-                            <div
-                                class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg sm:text-xl flex-shrink-0">
-                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-                            </div>
+                            @if(auth()->user()->avatar)
+                                <img src="{{ auth()->user()->avatar }}" 
+                                     alt="{{ auth()->user()->name ?? 'John Doe' }}" 
+                                     class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl object-cover flex-shrink-0">
+                            @else
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-accent-1 to-accent-3 rounded-xl flex items-center justify-center text-white font-bold text-lg sm:text-xl flex-shrink-0">
+                                    {{ substr(auth()->user()->name ?? 'John Doe', 0, 1) }}
+                                </div>
+                            @endif
                             <div class="min-w-0 flex-1">
                                 <h3 class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white truncate">
-                                    {{ auth()->user()->name ?? 'User Name' }}
+                                    {{ auth()->user()->name ?? 'John Doe' }}
                                 </h3>
                                 <p class="text-sm text-slate-500 dark:text-slate-400 truncate">
-                                    {{ auth()->user()->email ?? 'user@example.com' }}
+                                    {{ auth()->user()->email ?? 'john.doe@example.com' }}
                                 </p>
                             </div>
                         </div>
@@ -222,18 +238,18 @@
 
                         {{-- Single Membership Plan --}}
                         <div
-                            class="p-4 sm:p-6 border-2 border-blue-500 bg-blue-50 dark:bg-blue-900/20 rounded-xl mb-6 sm:mb-8">
+                            class="p-4 sm:p-6 border-2 border-accent-1 bg-accent-2/30 dark:bg-accent-1/10 rounded-xl mb-6 sm:mb-8">
                             {{-- Plan Header --}}
                             <div
                                 class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-2 sm:space-y-0">
                                 <div>
-                                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Semester
-                                        Membership</h3>
-                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Perfect for focused
-                                        project work</p>
+                                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{{ $feeName }}</h3>
+                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">{{ $feeDescription }}</p>
                                 </div>
                                 <div class="text-left sm:text-right">
-                                    <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">K2,000</div>
+                                    <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+                                        {{ $feeCurrency }}{{ number_format($feeAmount, 0) }}
+                                    </div>
                                     <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">per semester</div>
                                 </div>
                             </div>
@@ -279,10 +295,10 @@
                             </div>
                         </div>
 
-                        {{-- Action Buttons --}}
+                        {{-- Action Buttons --}}    
                         <div class="flex flex-col gap-3 sm:gap-4">
                             <button type="button"
-                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-500/20 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">
+                                class="w-full bg-accent-1 hover:bg-accent-3 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-accent-1/20 dark:focus:ring-accent-1/20 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -311,7 +327,7 @@
                                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                             <span>Secure payments powered by</span>
-                            <span class="font-semibold text-blue-600 dark:text-blue-400">PayChangu</span>
+                            <span class="font-semibold text-accent-1 dark:text-accent-3">PayChangu</span>
                         </div>
                     </div>
                 </div>
