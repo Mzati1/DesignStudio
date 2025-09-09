@@ -12,11 +12,13 @@ class PaymentService
     private string $apiUrl;
     private string $returnUrl;
     private string $callbackUrl;
+    private string $verifyUrl;
 
     public function __construct()
     {
         $this->client = new Client();
-        $this->apiUrl = env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment'); // PayChangu endpoint
+        $this->apiUrl = env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment');
+        $this->verifyUrl = env('PAYCHANGU_VERIFY_TRANSACTION_URL', 'https://api.paychangu.com/verify-payment');
         $this->returnUrl = config('app.url') . '/payment/return';
         $this->callbackUrl = config('app.url') . '/payment/callback';
     }
@@ -81,6 +83,57 @@ class PaymentService
             return [
                 'success' => false,
                 'error' => 'Request failed: ' . $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Verify a transaction with PayChangu
+     *
+     * @param array $transactionData ['tx_ref'] - transaction reference to verify
+     * @return array
+     */
+    public function verifyTransaction(array $transactionData): array
+    {
+        try {
+            $secretKey = env('PAYCHANGU_TEST_SECRET_KEY');
+
+            if (empty($secretKey)) {
+                throw new Exception('Missing PAYCHANGU_TEST_SECRET_KEY in environment.');
+            }
+
+            if (empty($transactionData['tx_ref'])) {
+                throw new Exception('Transaction reference (tx_ref) is required.');
+            }
+
+            $verifyEndpoint = $this->verifyUrl . '/' . $transactionData['tx_ref'];
+
+            $response = $this->client->get($verifyEndpoint, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $secretKey,
+                    'accept' => 'application/json',
+                ],
+            ]);
+
+            $responseData = json_decode($response->getBody(), true);
+
+            if (isset($responseData['status']) && $responseData['status'] === 'success') {
+                return [
+                    'success' => true,
+                    'data' => $responseData['data'],
+                ];
+            }
+
+            return [
+                'success' => false,
+                'error' => $responseData['message'] ?? 'Transaction verification failed',
+                'data' => $responseData['data'] ?? null,
+            ];
+
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'error' => 'Verification request failed: ' . $e->getMessage(),
             ];
         }
     }
