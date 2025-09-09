@@ -61,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['verified'])
         ->name('dashboard');
     
+    Route::view('membership', 'admin.membership')
+        ->middleware(['verified'])
+        ->name('membership');
+    
     /*
     |----------------------------------------------------------------------
     | Settings Routes
