@@ -30,7 +30,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// Payment Endpoints
+Route::get('/members/register', function () {
+    return view('members.register');
+});
 
 
 // Social auth routes
