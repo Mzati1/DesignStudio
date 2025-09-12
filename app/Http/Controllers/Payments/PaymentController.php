@@ -9,6 +9,7 @@ use App\Services\PaymentService;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -19,35 +20,60 @@ class PaymentController extends Controller
         $this->paymentService = $paymentService;
     }
 
-    public function startPayment(array $paymentData): array
+    public function initialize(Request $request)
     {
         try {
-            return $this->paymentService->initialize($paymentData);
+            // Validate the request data
+            $request->validate([
+                'amount' => 'required|numeric|min:1',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'currency' => 'required|string|max:3',
+            ]);
+
+            // Prepare payment data
+            $paymentData = [
+                'amount' => $request->amount,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'currency' => $request->currency ?? 'MWK',
+                'meta' => $request->meta ? json_decode($request->meta, true) : null,
+            ];
+
+            // Initialize payment with PayChangu
+            $result = $this->paymentService->initialize($paymentData);
+
+            if ($result['success'] && isset($result['checkout_url'])) {
+                // Redirect to PayChangu checkout
+                return redirect($result['checkout_url']);
+            } else {
+                // Handle error - redirect back with error message
+                return redirect()->back()->with('error', $result['error'] ?? 'Payment initialization failed. Please try again.');
+            }
+
         } catch (Exception $e) {
             // Log the error if needed
             // \Log::error('Payment initialization failed: ' . $e->getMessage());
-            return [
-                'success' => false,
-                'error' => 'Payment initialization failed.',
-                'details' => $e->getMessage(),
-            ];
+            return redirect()->back()->with('error', 'Payment initialization failed. Please try again.');
         }
     }
 
-    public function store(StorePaymentRequest $request): JsonResponse
+    public function store(Request $request, $tx_ref)
     {
         try {
             // Verify the transaction first
             $verificationResult = $this->paymentService->verifyTransaction([
-                'tx_ref' => $request->tx_ref
+                'tx_ref' => $tx_ref
             ]);
 
             if (!$verificationResult['success']) {
-                return response()->json([
+                dd([
                     'success' => false,
                     'error' => 'Transaction verification failed',
                     'details' => $verificationResult['error']
-                ], 400);
+                ]);
             }
 
             $transactionData = $verificationResult['data'];
@@ -57,7 +83,7 @@ class PaymentController extends Controller
 
             // Create payment record
             $payment = Payment::create([
-                'user_id' => $request->user_id,
+                'user_id' => auth()->id(),
                 'tx_ref' => $transactionData['tx_ref'],
                 'reference' => $transactionData['reference'] ?? null,
                 'event_type' => $transactionData['event_type'] ?? null,
@@ -79,22 +105,29 @@ class PaymentController extends Controller
                     : null,
             ]);
 
-            return response()->json([
+            // Display all data with dd()
+            dd([
                 'success' => true,
                 'message' => 'Payment stored successfully',
                 'payment' => $payment,
-                'transaction_data' => $transactionData
-            ], 201);
+                'transaction_data' => $transactionData,
+                'verification_result' => $verificationResult,
+                'card_info' => $cardInfo,
+                'request_data' => $request->all(),
+                'tx_ref' => $tx_ref
+            ]);
 
         } catch (Exception $e) {
             // Log the error if needed
             // \Log::error('Payment storage failed: ' . $e->getMessage());
 
-            return response()->json([
+            dd([
                 'success' => false,
                 'error' => 'Payment storage failed',
-                'details' => $e->getMessage()
-            ], 500);
+                'details' => $e->getMessage(),
+                'tx_ref' => $tx_ref,
+                'request_data' => $request->all()
+            ]);
         }
     }
 

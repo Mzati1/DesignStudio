@@ -19,8 +19,8 @@ class PaymentService
         $this->client = new Client();
         $this->apiUrl = env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment');
         $this->verifyUrl = env('PAYCHANGU_VERIFY_TRANSACTION_URL', 'https://api.paychangu.com/verify-payment');
-        $this->returnUrl = config('app.url') . '/payment/return';
-        $this->callbackUrl = config('app.url') . '/payment/callback';
+        $this->returnUrl = env('APP_LOCALHOST').'/payment/return';
+        $this->callbackUrl = env('APP_LOCALHOST').'/payment/callback';
     }
 
     /**

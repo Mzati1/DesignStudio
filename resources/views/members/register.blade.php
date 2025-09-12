@@ -295,17 +295,60 @@
                             </div>
                         </div>
 
+                        {{-- Error Messages --}}
+                        @if ($errors->any())
+                            <div class="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                <div class="flex">
+                                    <svg class="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-red-800 dark:text-red-200">Please fix the following errors:</h3>
+                                        <ul class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                <div class="flex">
+                                    <svg class="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div class="text-sm text-red-700 dark:text-red-300">
+                                        {{ session('error') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         {{-- Action Buttons --}}    
                         <div class="flex flex-col gap-3 sm:gap-4">
-                            <button type="button"
-                                class="w-full bg-accent-1 hover:bg-accent-3 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-accent-1/20 dark:focus:ring-accent-1/20 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                                </svg>
-                                <span>Complete Payment</span>
-                            </button>
+                            <form method="POST" action="{{ route('payment.initialize') }}" class="w-full">
+                                @csrf
+                                {{-- Hidden fields for payment data --}}
+                                <input type="hidden" name="amount" value="{{ $feeAmount }}">
+                                <input type="hidden" name="currency" value="{{ $feeCurrency }}">
+                                <input type="hidden" name="first_name" value="{{ auth()->user()->name ? explode(' ', auth()->user()->name)[0] : 'User' }}">
+                                <input type="hidden" name="last_name" value="{{ auth()->user()->name ? (count(explode(' ', auth()->user()->name)) > 1 ? implode(' ', array_slice(explode(' ', auth()->user()->name), 1)) : '') : '' }}">
+                                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                                <input type="hidden" name="meta" value="{{ json_encode(['membership_type' => 'semester', 'fee_id' => $semesterFee->id ?? null]) }}">
+                                
+                                <button type="submit"
+                                    class="w-full bg-accent-1 hover:bg-accent-3 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-accent-1/20 dark:focus:ring-accent-1/20 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                    </svg>
+                                    <span>Complete Payment</span>
+                                </button>
+                            </form>
 
                             <a href="{{ route('home') }}"
                                 class="w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-slate-200/50 dark:focus:ring-slate-600/50 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">
@@ -347,33 +390,6 @@
                 document.getElementById('main-content').classList.remove('hidden');
             }, 1500);
 
-            // Complete payment button handling
-            const completePaymentBtn = document.querySelector('button[type="button"]');
-            if (completePaymentBtn) {
-                completePaymentBtn.addEventListener('click', function() {
-                    // Add loading state to button
-                    this.disabled = true;
-                    this.innerHTML = `
-                        <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing Payment...
-                    `;
-
-                    // Here you would integrate with PayChangu
-                    setTimeout(() => {
-                        alert('This would integrate with PayChangu payment system.');
-                        this.disabled = false;
-                        this.innerHTML = `
-                            <svg class="w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                            </svg>
-                            <span>Complete Payment</span>
-                        `;
-                    }, 2000);
-                });
-            }
         });
     </script>
 @endsection

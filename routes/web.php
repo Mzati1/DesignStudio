@@ -61,10 +61,6 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['verified'])
         ->name('dashboard');
     
-    Route::view('membership', 'admin.membership')
-        ->middleware(['verified'])
-        ->name('membership');
-    
     /*
     |----------------------------------------------------------------------
     | Settings Routes
@@ -90,11 +86,6 @@ Route::middleware(['auth'])->group(function () {
         return view('members.register');
     })->name('members.register');
     
-    // Membership subscription (testing purposes)
-    Route::get('membership/subscribe', function () {
-        return view('membership.subscribe');
-    })->name('membership.subscribe');
-    
     Route::post('membership/subscribe', [MemberController::class, 'subscribeMembership'])
         ->name('membership.subscribe.post');
     
@@ -108,35 +99,20 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('payment')
         ->name('payment.')
         ->group(function () {
-            // Initialize payment with PayChangu
+            // Initialize payment
             Route::post('/initialize', [PaymentController::class, 'initialize'])
                 ->name('initialize');
-            
-            // Store payment after verification
-            Route::post('/store', [PaymentController::class, 'store'])
-                ->name('store');
+
+            // Payment return (redirect after payment completion)
+            Route::match(['get', 'post'], '/return/{tx_ref}', [PaymentController::class, 'store'])
+                ->name('return');
+    
+             // Payment callback
+            Route::match(['get', 'post'], '/callback/{tx_ref}', [PaymentController::class, 'store'])
+                ->name('callback');
             
             // Get payment status
-            Route::get('/status', [PaymentController::class, 'status'])
+            Route::get('/status/{tx_ref}', [PaymentController::class, 'status'])
                 ->name('status');
         });
 });
-
-/*
-|--------------------------------------------------------------------------
-| Payment Webhook Routes
-|--------------------------------------------------------------------------
-| These routes handle callbacks from payment providers (no auth required)
-*/
-
-Route::prefix('payment')
-    ->name('payment.')
-    ->group(function () {
-        // Payment return (redirect after payment completion)
-        Route::get('/return', [PaymentController::class, 'return'])
-            ->name('return');
-        
-        // Payment callback (webhook from PayChangu)
-        Route::post('/callback', [PaymentController::class, 'callback'])
-            ->name('callback');
-    });
