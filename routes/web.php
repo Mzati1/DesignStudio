@@ -114,5 +114,9 @@ Route::middleware(['auth'])->group(function () {
             // Get payment status
             Route::get('/status/{tx_ref}', [PaymentController::class, 'status'])
                 ->name('status');
+            
+            // Payment verification page
+            Route::get('/verify', [PaymentController::class, 'verify'])
+                ->name('verify');
         });
 });

@@ -69,10 +69,11 @@ class PaymentController extends Controller
             ]);
 
             if (!$verificationResult['success']) {
-                dd([
-                    'success' => false,
-                    'error' => 'Transaction verification failed',
-                    'details' => $verificationResult['error']
+                // Redirect to verification page with verification failure
+                return redirect()->route('payment.verify', [
+                    'tx_ref' => $tx_ref,
+                    'status' => 'verification_failed',
+                    'error' => $verificationResult['error'] ?? 'Transaction verification failed'
                 ]);
             }
 
@@ -105,28 +106,24 @@ class PaymentController extends Controller
                     : null,
             ]);
 
-            // Display all data with dd()
-            dd([
-                'success' => true,
-                'message' => 'Payment stored successfully',
-                'payment' => $payment,
-                'transaction_data' => $transactionData,
-                'verification_result' => $verificationResult,
-                'card_info' => $cardInfo,
-                'request_data' => $request->all(),
-                'tx_ref' => $tx_ref
+            // Redirect to verification page with payment data
+            return redirect()->route('payment.verify', [
+                'tx_ref' => $tx_ref,
+                'status' => $transactionData['status'],
+                'amount' => $transactionData['amount'],
+                'currency' => $transactionData['currency'] ?? 'MWK',
+                'payment_id' => $payment->id
             ]);
 
         } catch (Exception $e) {
             // Log the error if needed
             // \Log::error('Payment storage failed: ' . $e->getMessage());
 
-            dd([
-                'success' => false,
-                'error' => 'Payment storage failed',
-                'details' => $e->getMessage(),
+            // Redirect to verification page with error status
+            return redirect()->route('payment.verify', [
                 'tx_ref' => $tx_ref,
-                'request_data' => $request->all()
+                'status' => 'failed',
+                'error' => $e->getMessage()
             ]);
         }
     }
@@ -154,5 +151,37 @@ class PaymentController extends Controller
         }
 
         return $cardInfo;
+    }
+
+    public function verify(Request $request)
+    {
+        $tx_ref = $request->get('tx_ref');
+        $status = $request->get('status');
+        $amount = $request->get('amount');
+        $currency = $request->get('currency', 'MWK');
+        $payment_id = $request->get('payment_id');
+        $error = $request->get('error');
+
+        // Determine if payment was successful
+        $isSuccess = in_array($status, ['successful', 'completed', 'success']);
+        $isFailed = in_array($status, ['failed', 'cancelled', 'verification_failed']);
+
+        // Get payment details if payment_id is provided
+        $payment = null;
+        if ($payment_id) {
+            $payment = Payment::find($payment_id);
+        }
+
+        return view('payments.verify', compact(
+            'tx_ref',
+            'status',
+            'amount',
+            'currency',
+            'payment_id',
+            'error',
+            'isSuccess',
+            'isFailed',
+            'payment'
+        ));
     }
 }
