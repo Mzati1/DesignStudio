@@ -40,4 +40,12 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
+
+    'paychangu' => [
+        'api_url' => env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment'),
+        'verify_url' => env('PAYCHANGU_VERIFY_TRANSACTION_URL', 'https://api.paychangu.com/verify-payment'),
+        'test_secret_key' => env('PAYCHANGU_TEST_SECRET_KEY'),
+        'live_secret_key' => env('PAYCHANGU_LIVE_SECRET_KEY'),
+        'mode' => env('PAYCHANGU_MODE', 'test'),
+    ],
 ];
