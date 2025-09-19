@@ -88,7 +88,8 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('membership/subscribe', [MemberController::class, 'subscribeMembership'])
         ->name('membership.subscribe.post');
-    
+});
+
     /*
     |----------------------------------------------------------------------
     | Payment Routes
@@ -96,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
     | Routes for handling payment processing with PayChangu
     */
     
-    Route::prefix('payment')
+Route::prefix('payment')
         ->name('payment.')
         ->group(function () {
             // Initialize payment
@@ -119,4 +120,3 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/verify', [PaymentController::class, 'verify'])
                 ->name('verify');
         });
-});
