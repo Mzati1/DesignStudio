@@ -17,7 +17,9 @@ class SocialAccountFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'social_name' => $this->faker->randomElement(['facebook', 'twitter', 'google', 'linkedin']),
+            'social_id' => $this->faker->uuid,
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }

@@ -17,7 +17,11 @@ class MemberFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'membership_number' => $this->faker->unique()->numerify('M#####'),
+            'status' => $this->faker->randomElement(['pending', 'active', 'inactive', 'expired']),
+            'started_at' => $this->faker->optional()->dateTime(),
+            'expires_at' => $this->faker->optional()->dateTime(),
         ];
     }
 }

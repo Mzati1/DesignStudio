@@ -17,7 +17,13 @@ class FeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->words(2, true),
+            'slug' => $this->faker->unique()->slug,
+            'amount' => $this->faker->randomFloat(2, 100, 10000),
+            'currency' => 'MWK',
+            'description' => $this->faker->optional()->sentence,
+            'created_by' => null,
+            'updated_by' => null,
         ];
     }
 }
