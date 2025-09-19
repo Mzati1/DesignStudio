@@ -1,11 +1,11 @@
-@props(['feeAmount', 'feeCurrency', 'semesterFee', 'user' => null, 'cancelRoute' => 'home'])
+@props(['feeAmount', 'feeCurrency', 'membershipFee', 'user' => null, 'cancelRoute' => 'home'])
 
 <div class="flex flex-col gap-3 sm:gap-4">
     {{-- Payment Form --}}
     <x-membership.payment-form 
         :feeAmount="$feeAmount" 
         :feeCurrency="$feeCurrency" 
-        :semesterFee="$semesterFee" 
+        :membershipFee="$membershipFee" 
         :user="$user" />
 
     {{-- Cancel Button --}}

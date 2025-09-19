@@ -11,7 +11,7 @@
             <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
                 {{ $feeCurrency }}{{ number_format($feeAmount, 0) }}
             </div>
-            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">per semester</div>
+            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">per year</div>
         </div>
     </div>
 

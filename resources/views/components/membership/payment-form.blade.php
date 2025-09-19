@@ -1,11 +1,11 @@
-@props(['feeAmount', 'feeCurrency', 'semesterFee', 'user' => null])
+@props(['feeAmount', 'feeCurrency', 'membershipFee', 'user' => null])
 
 @php
     $user = $user ?? auth()->user();
     $firstName = $user->name ? explode(' ', $user->name)[0] : 'User';
     $lastName = $user->name ? (count(explode(' ', $user->name)) > 1 ? implode(' ', array_slice(explode(' ', $user->name), 1)) : '') : '';
     $userEmail = $user->email;
-    $metaData = json_encode(['membership_type' => 'semester', 'fee_id' => $semesterFee->id ?? null]);
+    $metaData = json_encode(['membership_type' => 'annual', 'fee_id' => $membershipFee->id ?? null]);
 @endphp
 
 <form method="POST" action="{{ route('payment.initialize') }}" class="w-full">

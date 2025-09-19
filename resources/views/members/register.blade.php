@@ -3,14 +3,13 @@
 @section('title', 'Complete Your Membership')
 
 @php
-    // Get semester membership fee from database
-    $semesterFee = \App\Models\Fee::where('slug', 'semester-membership')->first();
-    
-    // Fallback data if not found in database
-    $feeName = $semesterFee->name ?? 'Semester Membership';
-    $feeAmount = $semesterFee->amount ?? 2000;
-    $feeCurrency = $semesterFee->currency ?? 'MWK';
-    $feeDescription = $semesterFee->description ?? 'Perfect for focused project work';
+    // Get membership fee data from controller
+    $feeData = app(\App\Http\Controllers\Members\MemberController::class)->getMembershipFeeData();
+    $membershipFee = $feeData['fee'];
+    $feeName = $feeData['name'];
+    $feeAmount = $feeData['amount'];
+    $feeCurrency = $feeData['currency'];
+    $feeDescription = $feeData['description'];
 @endphp
 
 @section('content')
@@ -61,7 +60,7 @@
                         <x-membership.action-buttons 
                             :feeAmount="$feeAmount" 
                             :feeCurrency="$feeCurrency" 
-                            :semesterFee="$semesterFee" />
+                            :membershipFee="$membershipFee" />
 
                         {{-- PayChangu Security Badge --}}
                         <x-membership.security-badge />
