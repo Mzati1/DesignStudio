@@ -3,7 +3,7 @@
 @section('title', 'Welcome to MUST Design Studio')
 
 @section('content')
-<div x-data="landingPageData()" class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+<div x-data="landingPageData()" class="min-h-screen bg-[hsl(var(--color-bg))] text-[hsl(var(--color-text-primary))] transition-colors duration-300">
     
     {{-- Hero Section --}}
     <x-welcomePage.hero-section 
@@ -240,29 +240,16 @@
     }
     
     ::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: hsl(var(--color-surface-muted));
     }
     
     ::-webkit-scrollbar-thumb {
-        background: #888;
+        background: hsl(var(--color-border));
         border-radius: 0;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    
-    /* Dark mode scrollbar */
-    .dark ::-webkit-scrollbar-track {
-        background: #374151;
-    }
-    
-    .dark ::-webkit-scrollbar-thumb {
-        background: #6b7280;
-    }
-    
-    .dark ::-webkit-scrollbar-thumb:hover {
-        background: #9ca3af;
+        background: hsl(var(--color-text-muted));
     }
     
     /* Harvard-inspired button styles */
@@ -285,7 +272,7 @@
     
     /* Enhanced focus states */
     button:focus {
-        outline: 2px solid #3b82f6;
+        outline: 2px solid hsl(var(--color-primary));
         outline-offset: 2px;
     }
     

@@ -25,6 +25,12 @@ new #[Layout('components.layouts.auth')] class extends Component {
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Check if email domain is allowed
+        if (!$this->isAllowedDomain($validated['email'])) {
+            $this->addError('email', 'Only emails from must.ac.mw domain are allowed.');
+            return;
+        }
+
         $validated['password'] = Hash::make($validated['password']);
 
         event(new Registered(($user = User::create($validated))));
@@ -32,6 +38,15 @@ new #[Layout('components.layouts.auth')] class extends Component {
         Auth::login($user);
 
         $this->redirectIntended(route('dashboard', absolute: false), navigate: true);
+    }
+
+    /**
+     * Check if the email domain is allowed.
+     */
+    protected function isAllowedDomain(string $email): bool
+    {
+        $domain = substr(strrchr($email, "@"), 1);
+        return strtolower($domain) === 'must.ac.mw';
     }
 }; ?>
 

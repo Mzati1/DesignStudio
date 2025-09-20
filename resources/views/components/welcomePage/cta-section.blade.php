@@ -32,9 +32,9 @@
             {{ $description }}
         </p>
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button class="px-8 py-4 bg-white text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-[hsl(var(--color-accent-2))] transform hover:scale-105">
+            <a href="{{ route('register') }}" class="inline-block px-8 py-4 bg-white text-gray-900 rounded-none font-semibold text-lg transition-all duration-200 hover:bg-[hsl(var(--color-accent-2))] transform hover:scale-105">
                 {{ $primaryButtonText }}
-            </button>
+            </a>
             <button class="px-8 py-4 border-2 border-white text-white rounded-none font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-accent-1">
                 {{ $secondaryButtonText }}
             </button>

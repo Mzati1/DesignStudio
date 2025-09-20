@@ -62,6 +62,11 @@ class SocialController extends Controller
                 $email = $this->buildFallbackEmail($provider, (string) $socialUser->getId());
             }
 
+            // Check if email domain is allowed
+            if (!$this->isAllowedDomain($email)) {
+                return redirect()->route('home')->with('error', 'Only emails from must.ac.mw domain are allowed for social login.');
+            }
+
             $name = $socialUser->getName() ?: $socialUser->getNickname() ?: ucfirst($provider) . ' User';
             $avatar = $socialUser->getAvatar();
 
@@ -136,5 +141,14 @@ class SocialController extends Controller
 
         // Shuffle to avoid predictable positions
         return str_shuffle($password);
+    }
+
+    /**
+     * Check if the email domain is allowed.
+     */
+    protected function isAllowedDomain(string $email): bool
+    {
+        $domain = substr(strrchr($email, "@"), 1);
+        return strtolower($domain) === 'must.ac.mw';
     }
 }

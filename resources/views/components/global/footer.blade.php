@@ -1,5 +1,5 @@
 {{-- resources/views/components/modern-footer.blade.php --}}
-<footer class="relative w-full mt-20 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-800"
+<footer class="relative w-full mt-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950"
     id="main-footer">
     {{-- Background Pattern --}}
     <div class="absolute inset-0 opacity-5 dark:opacity-10">
@@ -83,32 +83,32 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="flex items-center space-x-3">
                         <div id="footer-brand-logo"
-                            class="w-12 h-12 bg-gradient-to-br from-zinc-600 to-zinc-700 dark:from-zinc-500 dark:to-zinc-600 rounded-2xl flex items-center justify-center shadow-lg cursor-pointer transform transition-all duration-200 hover:scale-105"
-                            onclick="toggleBrandAnimation()">
+                            class="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-500 dark:to-gray-600 rounded-2xl flex items-center justify-center shadow-lg dark:shadow-gray-900/50 cursor-pointer transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                            onclick="toggleBrandAnimation()" tabindex="0">
                             <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-zinc-900 dark:text-white">MUST Design Studio</h3>
-                            <p class="text-sm text-zinc-600 dark:text-zinc-400">Creative Excellence</p>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">MUST Design Studio</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Creative Excellence</p>
                         </div>
                     </div>
 
-                    <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         Transforming ideas into exceptional digital experiences through innovative design, cutting-edge
                         technology, and strategic thinking.
                     </p>
 
                     {{-- Social Links --}}
                     <div class="space-y-4">
-                        <h4 class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider">
+                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                             Follow Us
                         </h4>
                         <div class="flex space-x-3">
                             @foreach ($socialPlatforms as $social)
                                 <a href="{{ $social['href'] }}" target="_blank" rel="noopener noreferrer"
-                                    class="w-10 h-10 rounded-xl flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-600 hover:text-white dark:hover:bg-zinc-500 transition-all duration-200 transform hover:scale-110 hover:shadow-lg social-link"
+                                    class="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-gray-700 dark:hover:text-blue-400 transition-all duration-200 transform hover:scale-105 hover:shadow-md dark:hover:shadow-gray-900/30 social-link focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                                     aria-label="Follow us on {{ $social['name'] }}" data-social="{{ $social['name'] }}"
                                     onmouseenter="showSocialHover('{{ $social['name'] }}')"
                                     onmouseleave="hideSocialHover()">
@@ -117,7 +117,7 @@
                             @endforeach
                         </div>
                         <p id="social-hover-text"
-                            class="text-xs text-zinc-500 dark:text-zinc-400 transition-opacity duration-200 opacity-0 h-4">
+                            class="text-xs text-gray-500 dark:text-gray-400 transition-opacity duration-200 opacity-0 h-4">
                         </p>
                     </div>
                 </div>
@@ -125,16 +125,16 @@
                 {{-- Links Sections --}}
                 @foreach ($footerLinks as $category => $links)
                     <div class="space-y-4">
-                        <h4 class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider">
+                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                             {{ $category }}
                         </h4>
                         <ul class="space-y-3">
                             @foreach ($links as $link)
                                 <li>
                                     <a href="{{ $link['href'] }}"
-                                        class="text-zinc-600 dark:text-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors duration-200 text-sm flex items-center group footer-link">
+                                        class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm flex items-center group footer-link focus:outline-none focus:text-gray-900 dark:focus:text-white">
                                         {{ $link['name'] }}
-                                        <svg class="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-200"
+                                        <svg class="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transform group-hover:translate-x-1 group-focus:translate-x-1 transition-all duration-200"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 5l7 7-7 7" />
@@ -149,15 +149,15 @@
         </div>
 
         {{-- Bottom Bar --}}
-        <div class="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-50/50 dark:bg-zinc-800/50">
+        <div class="border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
                     <div
-                        class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-zinc-600 dark:text-zinc-400">
+                        class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-gray-600 dark:text-gray-400">
                         <p>&copy; {{ date('Y') }} MUST Design Studio. All rights reserved.</p>
                         <div class="flex items-center space-x-1 text-xs">
                             <span>Made with</span>
-                            <svg class="w-3 h-3 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 text-red-500 dark:text-red-400 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                             </svg>
@@ -168,22 +168,22 @@
                     <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
                         <div class="flex space-x-4">
                             <a href="/privacy"
-                                class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
+                                class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus:text-gray-900 dark:focus:text-white">
                                 Privacy Policy
                             </a>
                             <a href="/terms"
-                                class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
+                                class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus:text-gray-900 dark:focus:text-white">
                                 Terms of Service
                             </a>
                             <a href="/cookies"
-                                class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
+                                class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus:text-gray-900 dark:focus:text-white">
                                 Cookie Policy
                             </a>
                         </div>
 
                         {{-- Back to Top Button --}}
                         <button id="back-to-top-btn" onclick="scrollToTop()"
-                            class="inline-flex items-center space-x-2 px-3 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-200 transform hover:scale-105">
+                            class="inline-flex items-center space-x-2 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -286,45 +286,38 @@
                 const socialLinks = document.querySelectorAll('.social-link');
                 socialLinks.forEach(link => {
                     link.addEventListener('mouseenter', function() {
-                        this.style.transform = 'scale(1.1) rotate(5deg)';
+                        this.style.transform = 'scale(1.05) translateY(-1px)';
                     });
 
                     link.addEventListener('mouseleave', function() {
-                        this.style.transform = 'scale(1) rotate(0deg)';
+                        this.style.transform = 'scale(1) translateY(0)';
                     });
                 });
             }
 
-            // Add keyboard accessibility for interactive elements
+            // Enhanced keyboard accessibility
             document.addEventListener('keydown', function(event) {
                 // Allow Enter key to trigger click on focusable elements
                 if (event.key === 'Enter' && event.target.matches('#footer-brand-logo, #back-to-top-btn')) {
                     event.target.click();
                 }
-            });
-
-            // Add focus styles for accessibility
-            const focusableElements = document.querySelectorAll(
-                '#footer-brand-logo, #back-to-top-btn, .social-link');
-            focusableElements.forEach(element => {
-                element.addEventListener('focus', function() {
-                    this.style.outline = '2px solid #3b82f6';
-                    this.style.outlineOffset = '2px';
-                });
-
-                element.addEventListener('blur', function() {
-                    this.style.outline = 'none';
-                });
+                
+                // Allow Space key for buttons
+                if (event.key === ' ' && event.target.matches('#back-to-top-btn')) {
+                    event.preventDefault();
+                    event.target.click();
+                }
             });
         });
     </script>
 
     <style>
-        /* CSS animations for footer entrance */
+        /* Enhanced CSS animations for footer entrance */
         #main-footer {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #main-footer.footer-visible {
@@ -332,10 +325,10 @@
             transform: translateY(0);
         }
 
-        /* Stagger animation for footer links */
+        /* Stagger animation for footer links with dark mode support */
         .footer-link {
             opacity: 0;
-            animation: fadeInUp 0.5s ease-out forwards;
+            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes fadeInUp {
@@ -343,34 +336,82 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Enhanced social link animations */
+        /* Enhanced social link animations with dark mode considerations */
         .social-link {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
 
-        /* Custom pulse animation for heart icon */
-        @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: scale(1);
+        /* Improved backdrop blur support */
+        @supports (backdrop-filter: blur(8px)) {
+            .backdrop-blur-sm {
+                backdrop-filter: blur(8px);
             }
+        }
 
-            50% {
-                transform: scale(1.1);
-            }
+        /* Custom scrollbar for webkit browsers with dark mode */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            @apply bg-gray-100 dark:bg-gray-800;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            @apply bg-gray-500 dark:bg-gray-500;
         }
 
         /* Smooth transitions for all interactive elements */
         .transition-all {
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Enhanced focus styles for better accessibility */
+        .focus\:outline-none:focus {
+            outline: none;
+        }
+
+        /* Improved button focus states for dark mode */
+        button:focus,
+        a:focus {
+            outline-offset: 2px;
+        }
+
+        /* Dark mode specific enhancements */
+        @media (prefers-color-scheme: dark) {
+            /* Enhance shadow visibility in dark mode */
+            .shadow-lg {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 
+                           0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Better backdrop for dark mode */
+            .backdrop-blur-sm {
+                backdrop-filter: blur(8px) saturate(150%);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-pulse,
+            .transition-all,
+            .transition-colors,
+            .transition-opacity,
+            .transform {
+                transition: none !important;
+                animation: none !important;
+            }
         }
     </style>
 </footer>

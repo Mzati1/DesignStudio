@@ -18,14 +18,14 @@
 
     @yield('head')
   </head>
-  <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-white min-h-screen flex flex-col">
+  <body class="bg-[hsl(var(--color-bg))] text-[hsl(var(--color-text-primary))] min-h-screen flex flex-col">
     
     <x-global.navigation />
     
-    <main class="flex-1 w-full mx-auto px-[10px] py-8">
+    <main class="flex-1 w-full mx-auto px-[10px] py-8 bg-[hsl(var(--color-bg))]">
       @yield('content')
     </main>
 
-    <x-footer />
+    <x-global.footer />
   </body>
 </html>

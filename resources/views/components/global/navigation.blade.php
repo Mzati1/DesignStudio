@@ -163,7 +163,7 @@
                     </svg>
                 </div>
                 <a href="{{ route($navigationConfig['brand']['route']) }}"
-                    class="text-xl font-semibold text-zinc-900 dark:text-white transition-colors duration-200 hover:text-zinc-700 dark:hover:text-zinc-300">
+                    class="hidden sm:block text-xl font-semibold text-zinc-900 dark:text-white transition-colors duration-200 hover:text-zinc-700 dark:hover:text-zinc-300">
                     {{ $navigationConfig['brand']['name'] }}
                 </a>
             </div>
@@ -440,7 +440,7 @@
                         <!-- Mobile Dropdown Section -->
                         <div class="px-4 py-2">
                             <p
-                                class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-2">
                                 {{ $navItem['label'] }}</p>
                             <div class="pl-3 space-y-1">
                                 @foreach ($navItem['items'] as $subItem)

@@ -26,6 +26,13 @@ new #[Layout('components.layouts.auth')] class extends Component {
     {
         $this->validate();
 
+        // Check if email domain is allowed
+        if (!$this->isAllowedDomain($this->email)) {
+            throw ValidationException::withMessages([
+                'email' => 'Only emails from must.ac.mw domain are allowed.',
+            ]);
+        }
+
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
@@ -69,6 +76,15 @@ new #[Layout('components.layouts.auth')] class extends Component {
     protected function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+    }
+
+    /**
+     * Check if the email domain is allowed.
+     */
+    protected function isAllowedDomain(string $email): bool
+    {
+        $domain = substr(strrchr($email, "@"), 1);
+        return strtolower($domain) === 'must.ac.mw';
     }
 };
 ?>
