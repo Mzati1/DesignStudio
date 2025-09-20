@@ -12,7 +12,7 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create(['email' => 'user@must.ac.mw']);
 
     $response = LivewireVolt::test('auth.login')
         ->set('email', $user->email)
@@ -27,7 +27,7 @@ test('users can authenticate using the login screen', function () {
 });
 
 test('users can not authenticate with invalid password', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create(['email' => 'user@must.ac.mw']);
 
     $response = LivewireVolt::test('auth.login')
         ->set('email', $user->email)
@@ -67,9 +67,11 @@ test('users can authenticate with email from allowed domain', function () {
 });
 
 test('users can logout', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create(['email' => 'user@must.ac.mw']);
 
-    $response = $this->actingAs($user)->post(route('logout'));
+    $response = $this->withoutMiddleware()
+        ->actingAs($user)
+        ->post(route('logout'));
 
     $response->assertRedirect(route('home'));
 
