@@ -23,14 +23,23 @@ return new class extends Migration {
 
             // core payment info
             $table->string('event_type')->nullable(); // e.g. checkout.payment
+
+            // Use enum for mode
             $table->enum('mode', ['sandbox', 'live'])->default('sandbox');
+
+            // Use enum for type if needed (left as string for flexibility)
             $table->string('type')->nullable(); // e.g. API Payment (Checkout)
-            $table->string('status')->default('pending');
+
+            // Use enum for status
+            $table->enum('status', ['pending', 'success', 'failed', 'cancelled', 'completed', 'verification_failed'])->default('pending');
+
             $table->unsignedInteger('number_of_attempts')->default(0);
 
             $table->decimal('amount', 12, 2);
             $table->decimal('charges', 12, 2)->default(0);
-            $table->string('currency', 10)->default('MWK');
+
+            // Use enum for currency, pivot MWK and USD
+            $table->enum('currency', ['MWK', 'USD'])->default('MWK');
 
             // agenda / reason for purchase
             $table->string('agenda')->nullable();

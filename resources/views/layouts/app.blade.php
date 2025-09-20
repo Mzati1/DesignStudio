@@ -20,8 +20,8 @@
   </head>
   <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-white min-h-screen flex flex-col">
     
-    <x-welcome-page.navigation />
-
+    <x-global.navigation />
+    
     <main class="flex-1 w-full mx-auto px-[10px] py-8">
       @yield('content')
     </main>

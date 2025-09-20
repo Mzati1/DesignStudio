@@ -3,12 +3,29 @@
 namespace App\Http\Controllers\Members;
 
 use App\Models\Member;
+use App\Models\Fee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Payments\PaymentController;
 
 class MemberController extends Controller
 {
+    /**
+     * Get membership fee data with fallbacks
+     */
+    public function getMembershipFeeData()
+    {
+        $membershipFee = Fee::where('slug', 'membership-fee')->first();
+        
+        return [
+            'fee' => $membershipFee,
+            'name' => $membershipFee->name ?? 'Membership Fee',
+            'amount' => $membershipFee->amount ?? 5000,
+            'currency' => $membershipFee->currency ?? 'MWK',
+            'description' => $membershipFee->description ?? 'Annual membership fee for Design Studio membership',
+        ];
+    }
+
     // Show all members (admin use)
     public function index()
     {

@@ -17,10 +17,10 @@ class PaymentService
     public function __construct()
     {
         $this->client = new Client();
-        $this->apiUrl = env('PAYCHANGU_API_URL', 'https://api.paychangu.com/payment');
-        $this->verifyUrl = env('PAYCHANGU_VERIFY_TRANSACTION_URL', 'https://api.paychangu.com/verify-payment');
-        $this->returnUrl = config('app.url') . '/payment/return';
-        $this->callbackUrl = config('app.url') . '/payment/callback';
+        $this->apiUrl = config('services.paychangu.api_url');
+        $this->verifyUrl = config('services.paychangu.verify_url');
+        $this->returnUrl = config('app.url').'/payment/return';
+        $this->callbackUrl = config('app.url').'/payment/callback';
     }
 
     /**
@@ -32,14 +32,33 @@ class PaymentService
     public function initialize(array $paymentData): array
     {
         try {
-            $secretKey = env('PAYCHANGU_TEST_SECRET_KEY');
+            $mode = config('services.paychangu.mode', 'test');
+            $secretKey = $mode === 'live' 
+                ? config('services.paychangu.live_secret_key')
+                : config('services.paychangu.test_secret_key');
 
             if (empty($secretKey)) {
-                throw new Exception('Missing PAYCHANGU_TEST_SECRET_KEY in environment.');
+                $keyType = $mode === 'live' ? 'PAYCHANGU_LIVE_SECRET_KEY' : 'PAYCHANGU_TEST_SECRET_KEY';
+                
+                // For development/testing purposes, provide a helpful error message
+                if (app()->environment('local', 'testing')) {
+                    throw new Exception("Missing {$keyType} in environment. Please add it to your .env file. Run 'php artisan paychangu:setup' for help.");
+                }
+                
+                throw new Exception("Missing {$keyType} in environment.");
             }
 
             $txRef = $this->generateTransactionReference();
             $uuid = Str::uuid()->toString();
+
+            // Prepare meta data including agenda and customization
+            $metaData = $paymentData['meta'] ?? [];
+            if (isset($paymentData['agenda'])) {
+                $metaData['agenda'] = $paymentData['agenda'];
+            }
+            if (isset($paymentData['customization'])) {
+                $metaData['customization'] = $paymentData['customization'];
+            }
 
             $payload = [
                 'currency' => 'MWK',
@@ -51,6 +70,7 @@ class PaymentService
                 'email' => $paymentData['email'],
                 'return_url' => $this->returnUrl,
                 'callback_url' => $this->callbackUrl,
+                'meta' => $metaData,
             ];
 
             $response = $this->client->post($this->apiUrl, [
@@ -96,10 +116,20 @@ class PaymentService
     public function verifyTransaction(array $transactionData): array
     {
         try {
-            $secretKey = env('PAYCHANGU_TEST_SECRET_KEY');
+            $mode = config('services.paychangu.mode', 'test');
+            $secretKey = $mode === 'live' 
+                ? config('services.paychangu.live_secret_key')
+                : config('services.paychangu.test_secret_key');
 
             if (empty($secretKey)) {
-                throw new Exception('Missing PAYCHANGU_TEST_SECRET_KEY in environment.');
+                $keyType = $mode === 'live' ? 'PAYCHANGU_LIVE_SECRET_KEY' : 'PAYCHANGU_TEST_SECRET_KEY';
+                
+                // For development/testing purposes, provide a helpful error message
+                if (app()->environment('local', 'testing')) {
+                    throw new Exception("Missing {$keyType} in environment. Please add it to your .env file. Run 'php artisan paychangu:setup' for help.");
+                }
+                
+                throw new Exception("Missing {$keyType} in environment.");
             }
 
             if (empty($transactionData['tx_ref'])) {
