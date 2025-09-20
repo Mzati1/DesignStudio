@@ -51,6 +51,15 @@ class PaymentService
             $txRef = $this->generateTransactionReference();
             $uuid = Str::uuid()->toString();
 
+            // Prepare meta data including agenda and customization
+            $metaData = $paymentData['meta'] ?? [];
+            if (isset($paymentData['agenda'])) {
+                $metaData['agenda'] = $paymentData['agenda'];
+            }
+            if (isset($paymentData['customization'])) {
+                $metaData['customization'] = $paymentData['customization'];
+            }
+
             $payload = [
                 'currency' => 'MWK',
                 'uuid' => $uuid,
@@ -61,6 +70,7 @@ class PaymentService
                 'email' => $paymentData['email'],
                 'return_url' => $this->returnUrl,
                 'callback_url' => $this->callbackUrl,
+                'meta' => $metaData,
             ];
 
             $response = $this->client->post($this->apiUrl, [

@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Logo URL
+    |--------------------------------------------------------------------------
+    |
+    | This value is the URL to your application's logo, which will be used
+    | in payment customization and other UI elements where a logo is needed.
+    | You can set this in your ".env" file as APP_LOGO_URL.
+    |
+    */
+
+    'logo_url' => env('APP_LOGO_URL', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

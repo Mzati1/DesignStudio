@@ -8,7 +8,7 @@
     $metaData = json_encode(['membership_type' => 'annual', 'fee_id' => $membershipFee->id ?? null]);
 @endphp
 
-<form method="POST" action="{{ route('payment.initialize') }}" class="w-full">
+<form method="POST" action="{{ route('payment.initialize') }}" class="w-full space-y-4">
     @csrf
     {{-- Hidden fields for payment data --}}
     <input type="hidden" name="amount" value="{{ $feeAmount }}">
@@ -17,6 +17,22 @@
     <input type="hidden" name="last_name" value="{{ $lastName }}">
     <input type="hidden" name="email" value="{{ $userEmail }}">
     <input type="hidden" name="meta" value="{{ $metaData }}">
+    
+    {{-- Static Agenda Field (Hidden) --}}
+    <input type="hidden" name="agenda" value="Registration Fee">
+    
+    {{-- Customization Fields (Hidden - populated from database) --}}
+    <input type="hidden" name="customization_title" value="{{ $membershipFee->name ?? 'Design Studio Membership' }}">
+    <input type="hidden" name="customization_description" value="{{ $membershipFee->description ?? 'Annual membership for Design Studio access and benefits' }}">
+    
+    {{-- Logo Asset - Using config value --}}
+    {{-- 
+    To use a logo asset, you can:
+    1. Set APP_LOGO_URL in your .env file: APP_LOGO_URL=https://yourdomain.com/images/logo.png
+    2. Or use asset() helper: {{ asset('images/logo.png') }}
+    3. Or use a direct URL: https://yourdomain.com/images/logo.png
+    --}}
+    <input type="hidden" name="customization_logo" value="{{ config('app.logo_url') }}">
     
     <button type="submit"
         class="w-full bg-accent-1 hover:bg-accent-3 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-accent-1/20 dark:focus:ring-accent-1/20 outline-none flex items-center justify-center space-x-2 group text-sm sm:text-base">

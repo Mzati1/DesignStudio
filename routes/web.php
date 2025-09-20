@@ -109,7 +109,7 @@ Route::prefix('payment')
                 ->name('return');
     
              // Payment callback
-            Route::match(['get', 'post'], '/callback/{tx_ref}', [PaymentController::class, 'store'])
+            Route::match(['get', 'post'], '/callback', [PaymentController::class, 'store'])
                 ->name('callback');
             
             // Get payment status

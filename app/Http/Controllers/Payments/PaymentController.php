@@ -30,7 +30,23 @@ class PaymentController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
                 'currency' => 'required|string|max:3',
+                'agenda' => 'nullable|string|max:255',
+                'customization_title' => 'nullable|string|max:255',
+                'customization_description' => 'nullable|string|max:1000',
+                'customization_logo' => 'nullable|string|max:500', // Changed from url to string to allow empty values
             ]);
+
+            // Prepare customization data
+            $customization = [];
+            if ($request->customization_title) {
+                $customization['title'] = $request->customization_title;
+            }
+            if ($request->customization_description) {
+                $customization['description'] = $request->customization_description;
+            }
+            if ($request->customization_logo && !empty(trim($request->customization_logo))) {
+                $customization['logo'] = $request->customization_logo;
+            }
 
             // Prepare payment data
             $paymentData = [
@@ -40,6 +56,8 @@ class PaymentController extends Controller
                 'email' => $request->email,
                 'currency' => $request->currency ?? 'MWK',
                 'meta' => $request->meta ? json_decode($request->meta, true) : null,
+                'agenda' => $request->agenda,
+                'customization' => !empty($customization) ? $customization : null,
             ];
 
             // Initialize payment with PayChangu
@@ -60,9 +78,19 @@ class PaymentController extends Controller
         }
     }
 
-    public function store(Request $request, $tx_ref)
+    public function store(Request $request)
     {
         try {
+            // Get tx_ref from query parameter
+            $tx_ref = $request->get('tx_ref');
+            
+            if (!$tx_ref) {
+                return redirect()->route('payment.verify', [
+                    'status' => 'failed',
+                    'error' => 'Transaction reference not provided'
+                ]);
+            }
+            
             // Verify the transaction first
             $verificationResult = $this->paymentService->verifyTransaction([
                 'tx_ref' => $tx_ref
@@ -82,24 +110,32 @@ class PaymentController extends Controller
             // Extract card information safely
             $cardInfo = $this->extractCardInfo($transactionData['authorization'] ?? []);
 
+            // Map Paystack mode to database enum values
+            $mode = $this->mapModeToEnum($transactionData['mode'] ?? 'sandbox');
+
+            // Extract agenda and customization from meta data
+            $metaData = $transactionData['meta'] ?? [];
+            $agenda = $metaData['agenda'] ?? $request->agenda ?? null;
+            $customization = $metaData['customization'] ?? $transactionData['customization'] ?? null;
+
             // Create payment record
             $payment = Payment::create([
                 'user_id' => auth()->id(),
                 'tx_ref' => $transactionData['tx_ref'],
                 'reference' => $transactionData['reference'] ?? null,
                 'event_type' => $transactionData['event_type'] ?? null,
-                'mode' => $transactionData['mode'] ?? 'sandbox',
+                'mode' => $mode,
                 'type' => $transactionData['type'] ?? null,
                 'status' => $transactionData['status'],
                 'number_of_attempts' => $transactionData['number_of_attempts'] ?? 0,
                 'amount' => $transactionData['amount'],
                 'charges' => $transactionData['charges'] ?? 0,
                 'currency' => $transactionData['currency'] ?? 'MWK',
-                'agenda' => $request->agenda ?? null,
+                'agenda' => $agenda,
                 'method' => $transactionData['authorization']['channel'] ?? null,
                 'card_brand' => $cardInfo['brand'],
                 'card_last4' => $cardInfo['last4'],
-                'customization' => $transactionData['customization'] ?? null,
+                'customization' => $customization,
                 'logs' => $transactionData['logs'] ?? null,
                 'completed_at' => isset($transactionData['authorization']['completed_at'])
                     ? \Carbon\Carbon::parse($transactionData['authorization']['completed_at'])
@@ -121,11 +157,25 @@ class PaymentController extends Controller
 
             // Redirect to verification page with error status
             return redirect()->route('payment.verify', [
-                'tx_ref' => $tx_ref,
+                'tx_ref' => $request->get('tx_ref'),
                 'status' => 'failed',
                 'error' => $e->getMessage()
             ]);
         }
+    }
+
+    /**
+     * Map Paystack mode values to database enum values
+     */
+    private function mapModeToEnum(string $mode): string
+    {
+        return match (strtolower($mode)) {
+            'test' => 'sandbox',
+            'sandbox' => 'sandbox',
+            'live' => 'live',
+            'production' => 'live',
+            default => 'sandbox'
+        };
     }
 
     /**

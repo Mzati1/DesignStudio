@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MemberSeeder::class);
 
         // Seed payments for each user
-        $this->call(PaymentSeeder::class);
+      //  $this->call(PaymentSeeder::class);
 
         // Seed social accounts for a few users
         $this->call(SocialAccountSeeder::class);
